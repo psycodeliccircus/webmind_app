@@ -1,13 +1,19 @@
+# Build configuration for WebMind
+
+# General settings
 appId: com.github.psycodeliccircus.webmind
-asarUnpack: '**/binaries/*'
 productName: WebMind
 copyright: Copyright © 2014-2023 WebMind
 
+# Windows settings
 win:
-  target: nsis
+  target:
+    - nsis
+    - portable
   icon: build/icon.ico
   requestedExecutionLevel: requireAdministrator
 
+# NSIS settings
 nsis:
   installerIcon: build/icon.ico
   uninstallerIcon: build/uninstall.ico
@@ -20,13 +26,14 @@ nsis:
   shortcutName: WebMind
   artifactName: webmind_installer.${ext}
 
+# Portable settings
 portable:
-  target: nsis
   artifactName: webmind_portable.${ext}
 
+# Publish settings
 publish:
-- provider: github
-  owner: psycodeliccircus
-  repo: webmind_app
-  releaseType: release
-  updaterCacheDirName: webmind_app-launcher
+  - provider: github
+    owner: psycodeliccircus
+    repo: webmind_app
+    releaseType: release
+    updaterCacheDirName: webmind_app-launcher

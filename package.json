@@ -20,8 +20,8 @@
   "scripts": {
     "start": "electron .",
     "clean": "rimraf dist",
-    "build:win": "yarn run clean && electron-builder --win",
-    "release:win": "yarn run clean && electron-builder --win -p always --config.portable",
+    "build": "yarn run clean && electron-builder --win",
+    "release": "yarn run clean && electron-builder --win -p always",
     "postinstall": "electron-builder install-app-deps"
   },
   "protocols": [
