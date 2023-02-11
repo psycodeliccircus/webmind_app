@@ -26,5 +26,3 @@ publish:
   repo: webmind_app
   releaseType: release
   updaterCacheDirName: webmind_app-launcher
-  private: true
-  token: ${GH_TOKEN}
