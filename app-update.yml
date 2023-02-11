@@ -1,0 +1,5 @@
+owner: psycodeliccircus
+repo: webmind_app
+provider: github
+releaseType: release
+updaterCacheDirName: webmind_app-updater

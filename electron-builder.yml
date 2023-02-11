@@ -1,0 +1,28 @@
+appId: com.github.psycodeliccircus.webmind
+asarUnpack: '**/binaries/*'
+productName: WebMind
+copyright: Copyright © 2014-2023 WebMind
+
+win:
+  target: nsis
+  icon: build/icon.ico
+  requestedExecutionLevel: requireAdministrator
+
+nsis:
+  installerIcon: build/icon.ico
+  uninstallerIcon: build/uninstall.ico
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  runAfterFinish: false
+  createStartMenuShortcut: true
+  packElevateHelper: false
+  createDesktopShortcut: true
+  shortcutName: WebMind
+  artifactName: webmind_installer.${ext}
+
+publish:
+- provider: github
+  owner: psycodeliccircus
+  repo: webmind_app
+  releaseType: release
+  updaterCacheDirName: webmind_app-launcher
