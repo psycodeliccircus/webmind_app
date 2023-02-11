@@ -5,19 +5,26 @@ on:
       - main
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [windows-latest, macOS-latest, ubuntu-latest]
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '14'
       - name: Install dependencies
-        run: npm ci
+        run: npm install
       - name: Create Installer
         run: npm run electron:build
         if: matrix.os == 'windows-latest'
@@ -44,5 +51,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: dist/*.exe
-          asset_name: webmind_installer_windows.exe
+          asset_name: webmind-installer-${{ matrix.os }}.exe
           asset_content_type: application/octet-stream
