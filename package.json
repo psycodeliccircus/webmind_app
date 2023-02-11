@@ -21,9 +21,7 @@
     "start": "electron .",
     "clean": "rimraf dist",
     "build:win": "yarn run clean && electron-builder --win",
-    "release:win": "yarn run clean && electron-builder --win -p always",
-    "electron:win": "electron-builder --win -p always",
-    "electron:build": "electron-builder --win",
+    "release:win": "yarn run clean && electron-builder --win -p always --config.portable",
     "postinstall": "electron-builder install-app-deps"
   },
   "protocols": [
