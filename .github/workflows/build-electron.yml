@@ -55,7 +55,7 @@ jobs:
           prerelease: false
 
       - name: Upload Installer
-        uses: actions/upload-release-asset@v2
+        uses: actions/upload-release-asset@v1
         if: matrix.os == 'windows-latest'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
