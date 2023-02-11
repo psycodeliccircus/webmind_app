@@ -18,11 +18,27 @@ nsis:
   packElevateHelper: false
   createDesktopShortcut: true
   shortcutName: WebMind
-  artifactName: webmind_installer.${ext}
+  artifactName: webmind_installer_windows.${ext}
+
+mac:
+  category: public.app-category.productivity
+  icon: build/icon.icns
+  target: dmg
+  artifactName: webmind_installer_mac.${ext}
+
+dmg:
+  background: build/background.png
+  icon: build/icon.icns
+
+linux:
+  target: AppImage
+  icon: build/icon.png
+  artifactName: webmind_installer_linux.${ext}
 
 publish:
-- provider: github
-  owner: psycodeliccircus
-  repo: webmind_app
-  releaseType: release
-  updaterCacheDirName: webmind_app-launcher
+  - provider: github
+    owner: psycodeliccircus
+    repo: webmind_app
+    releaseType: release
+    updaterCacheDirName: webmind_app-launcher
+
