@@ -20,12 +20,6 @@ jobs:
       - name: Create Windows Installer
         if: runner.os == 'windows'
         run: npm run electron:win
-      - name: Create Mac DMG
-        if: runner.os == 'macos'
-        run: npm run electron:mac
-      - name: Create Linux Installer
-        if: runner.os == 'ubuntu'
-        run: npm run electron:linux
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
@@ -51,26 +45,4 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: dist/*.exe
           asset_name: webmind_installer_windows.exe
-          asset_content_type: application/octet-stream
-      - name: Upload Mac DMG
-        if: runner.os == 'macos'
-        id: upload-mac
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: dist/*.dmg
-          asset_name: webmind_installer_mac.dmg
-          asset_content_type: application/octet-stream
-      - name: Upload Linux Installer
-        if: runner.os == 'ubuntu'
-        id: upload-linux
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: dist/*.AppImage
-          asset_name: webmind_installer_linux.AppImage
           asset_content_type: application/octet-stream

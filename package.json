@@ -22,6 +22,7 @@
     "clean": "rimraf dist",
     "build:win": "yarn run clean && electron-builder --win",
     "release:win": "yarn run clean && electron-builder --win -p always",
+    "electron:win": "electron-builder --win -p always",
     "electron:build": "electron-builder --win",
     "postinstall": "electron-builder install-app-deps"
   },
