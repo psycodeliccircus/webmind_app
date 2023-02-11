@@ -20,6 +20,10 @@ nsis:
   shortcutName: WebMind
   artifactName: webmind_installer.${ext}
 
+portable:
+  target: nsis
+  artifactName: webmind_portable.${ext}
+
 publish:
 - provider: github
   owner: psycodeliccircus
