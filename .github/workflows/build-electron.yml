@@ -34,7 +34,7 @@ jobs:
         run: npm install
 
       - name: Create Installer
-        run: npm run electron:build
+        run: npm run build:win
         if: matrix.os == 'windows-latest'
 
       - name: Upload Artifact
