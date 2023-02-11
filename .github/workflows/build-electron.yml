@@ -6,39 +6,41 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [windows-latest, macOS-latest, ubuntu-latest]
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '14'
       - name: Install dependencies
-        run: npm install
-      - name: Create Windows Installer
-        if: runner.os == 'windows'
-        run: npm run electron:win
-      - name: Upload artifact
+        run: npm ci
+      - name: Create Installer
+        run: npm run electron:build
+        if: matrix.os == 'windows-latest'
+      - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ runner.os }}-build
+          name: ${{ matrix.os }}-build
           path: dist/*
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false
-      - name: Upload Windows Installer
-        if: runner.os == 'windows'
-        id: upload-win
-        uses: actions/upload-release-asset@v1
+      - name: Upload Installer
+        uses: actions/upload-release-asset@v3
+        if: matrix.os == 'windows-latest'
         env:
-          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: dist/*.exe
